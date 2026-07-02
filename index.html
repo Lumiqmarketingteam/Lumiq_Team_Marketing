@@ -366,6 +366,7 @@ html{scrollbar-gutter:stable}
 @media (hover:hover) and (pointer:fine){.modal .chip span:hover{color:var(--ink);border-color:var(--ink-3)}}
 .modal .actions{margin-top:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .modal .form-note{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.02em;color:var(--ink-3);line-height:1.5}
+.modal .send-err{display:none;width:100%;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.02em;color:var(--err);line-height:1.5}
 .modal .done{display:none}
 .modal .done.show{display:block;animation:mpop .45s var(--e)}
 .modal .done .check{width:48px;height:48px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 10px 30px -10px var(--accent-glow)}
@@ -703,6 +704,7 @@ html{scrollbar-gutter:stable}
           <div class="actions">
             <button type="submit" class="btn btn-primary">Book briefing <span class="ar">&rarr;</span></button>
             <span class="form-note">45 minutes &middot; remote or on-site.</span>
+            <span class="send-err">Couldn&rsquo;t send just now — please retry or email hello@litecone.ai.</span>
           </div>
       </form>
       <div class="done" role="status" aria-live="polite">
@@ -738,6 +740,7 @@ html{scrollbar-gutter:stable}
           <div class="actions">
             <button type="submit" class="btn btn-primary">Request demo <span class="ar">&rarr;</span></button>
             <span class="form-note">Tailored to your process &middot; ~30 minutes.</span>
+            <span class="send-err">Couldn&rsquo;t send just now — please retry or email hello@litecone.ai.</span>
           </div>
       </form>
       <div class="done" role="status" aria-live="polite">
@@ -773,6 +776,7 @@ html{scrollbar-gutter:stable}
           <div class="actions">
             <button type="submit" class="btn btn-primary">Send message <span class="ar">&rarr;</span></button>
             <span class="form-note">We reply within one business day.</span>
+            <span class="send-err">Couldn&rsquo;t send just now — please retry or email hello@litecone.ai.</span>
           </div>
       </form>
       <div class="done" role="status" aria-live="polite">
@@ -954,6 +958,7 @@ html{scrollbar-gutter:stable}
   (function(){
     var openOv = null;
     var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    var LEAD_ENDPOINT = 'https://formsubmit.co/ajax/team.marketing@lumiq.ai';
 
     function openModal(id, trigger){
       var ov = document.getElementById(id); if(!ov) return false;
@@ -1015,10 +1020,30 @@ html{scrollbar-gutter:stable}
         if(!ok){ var fe = form.querySelector('.field.err .control'); if(fe) fe.focus(); return; }
         var data = {};
         new FormData(form).forEach(function(v,k){ data[k] = (k in data) ? [].concat(data[k], v) : v; });
-        console.log('LiteCone lead ·', form.getAttribute('data-form'), data);
-        /* TODO: POST `data` to your endpoint (Formspree / API route / etc.) */
-        form.style.display = 'none';
-        if(done) done.classList.add('show');
+        if(Array.isArray(data.coworkers)) data.coworkers = data.coworkers.join(', ');
+        data.form_type = form.getAttribute('data-form');
+        data._subject = 'LiteCone lead · ' + data.form_type + (data.name ? ' · ' + data.name : '') + (data.company ? ' — ' + data.company : '');
+        data._template = 'table';
+        data._captcha = 'false';
+        if(data.email) data._replyto = data.email;
+        var btn = form.querySelector('button[type="submit"]');
+        var sendErr = form.querySelector('.send-err');
+        if(sendErr) sendErr.style.display = 'none';
+        var orig = btn.innerHTML;
+        btn.disabled = true; btn.innerHTML = 'Sending&hellip;';
+        fetch(LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          body: JSON.stringify(data)
+        }).then(function(r){
+          if(!r.ok) throw new Error('send failed');
+          btn.disabled = false; btn.innerHTML = orig;
+          form.style.display = 'none';
+          if(done) done.classList.add('show');
+        }).catch(function(){
+          btn.disabled = false; btn.innerHTML = orig;
+          if(sendErr) sendErr.style.display = 'block';
+        });
       });
       form.addEventListener('input', function(e){ var w = e.target.closest && e.target.closest('.field'); if(w) w.classList.remove('err'); });
     });
