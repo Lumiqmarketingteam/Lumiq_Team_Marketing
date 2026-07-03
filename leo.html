@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#F5F5F2;--ink-2:#B2B2AE;--ink-3:#767672;
+  --ink:#F5F5F2;--ink-2:#B2B2AE;--ink-3:#82827E;--accent-ink:#F36B1D;
   --bg:#0A0A0A;--bg-1:#0E0E0E;--bg-2:#141414;
   --line:rgba(245,245,242,.08);--line-2:rgba(245,245,242,.14);
   --accent:#F36B1D;--accent-hi:#FF8438;--accent-glow:rgba(243,107,29,.35);
@@ -32,7 +32,7 @@
 }
 @media (prefers-color-scheme: light){
   :root{
-    --ink:#0F0F0E;--ink-2:#4A4A48;--ink-3:#7A7A76;
+    --ink:#0F0F0E;--ink-2:#4A4A48;--ink-3:#666662;--accent-ink:#BC4708;
     --bg:#FAFAF7;--bg-1:#F2F2ED;--bg-2:#EAEAE3;
     --line:rgba(15,15,14,.10);--line-2:rgba(15,15,14,.18);
     --accent:#E45A0B;--accent-hi:#F36B1D;--accent-glow:rgba(228,90,11,.22);
@@ -51,7 +51,7 @@ img{max-width:100%;display:block}
 header{position:fixed;inset:0 0 auto 0;z-index:80;background:var(--header-bg);backdrop-filter:blur(18px) saturate(1.2);border-bottom:1px solid var(--line)}
 .nav{max-width:1440px;margin:0 auto;padding:16px var(--edge);display:flex;align-items:center;justify-content:space-between;gap:24px}
 .back{display:inline-flex;align-items:center;gap:9px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);transition:color .2s var(--e)}
-@media (hover:hover) and (pointer:fine){.back:hover{color:var(--accent)}}
+@media (hover:hover) and (pointer:fine){.back:hover{color:var(--accent-ink)}}
 .btn{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:500;padding:12px 20px;border-radius:8px;border:1px solid transparent;line-height:1;transition:transform .2s var(--e),background .2s var(--e),border-color .2s var(--e),color .2s var(--e)}
 .btn .ar{display:inline-block;transition:transform .25s var(--e)}
 .btn-primary{background:var(--accent);color:#100600;box-shadow:0 8px 30px -12px var(--accent-glow)}
@@ -66,7 +66,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:80;background:var(--header-bg);ba
 .hero{padding:clamp(130px,18vh,190px) 0 clamp(48px,7vh,80px)}
 .eyebrow{display:flex;align-items:center;gap:14px}
 .eyebrow .rule{flex:0 0 clamp(48px,8vw,110px);height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
-.eyebrow .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.28em;color:var(--accent);text-transform:uppercase}
+.eyebrow .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.28em;color:var(--accent-ink);text-transform:uppercase}
 .profile{margin-top:clamp(32px,5vw,48px);display:flex;align-items:center;gap:clamp(20px,3.5vw,36px);flex-wrap:wrap}
 .face{width:clamp(96px,12vw,128px);height:clamp(96px,12vw,128px);border-radius:24px;object-fit:cover;border:1px solid var(--line-2);box-shadow:0 24px 60px -24px rgba(0,0,0,.5)}
 .p-name{font-family:'Hanken Grotesk';font-weight:800;font-size:clamp(44px,8vw,84px);line-height:.95;letter-spacing:-.02em;text-transform:uppercase}
@@ -84,13 +84,13 @@ header{position:fixed;inset:0 0 auto 0;z-index:80;background:var(--header-bg);ba
 .fact .l{margin-top:12px;font-size:13.5px;color:var(--ink-2);line-height:1.5}
 .does{margin-top:clamp(36px,6vw,56px);display:grid;gap:0;border-top:1px solid var(--line)}
 .do-row{display:grid;grid-template-columns:56px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.do-row .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.1em}
+.do-row .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);letter-spacing:.1em}
 .do-row .t{font-size:16px;color:var(--ink-2);line-height:1.55;max-width:62ch}
 .do-row .t b{color:var(--ink);font-weight:600}
 
 .build{margin-top:clamp(40px,7vw,64px);border:1px solid var(--line);border-radius:16px;padding:clamp(28px,4.5vw,44px);background:linear-gradient(180deg,var(--tint),transparent);position:relative;overflow:hidden}
 .build::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),transparent)}
-.build .bt{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.build .bt{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-ink)}
 .build .bt .pip{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
 .build h2{margin-top:16px;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,3.2vw,34px);letter-spacing:-.015em;line-height:1.15}
 .build p{margin-top:12px;font-size:15.5px;color:var(--ink-2);max-width:56ch;line-height:1.55}
@@ -99,6 +99,9 @@ header{position:fixed;inset:0 0 auto 0;z-index:80;background:var(--header-bg);ba
 footer{border-top:1px solid var(--line);padding:32px 0;background:var(--bg-1)}
 .foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-3)}
 @media (max-width:640px){.facts{grid-template-columns:1fr}.fact:not(:last-child){border-right:none}}
+.skip{position:fixed;left:16px;top:-72px;z-index:300;background:var(--accent);color:#100600;padding:12px 18px;border-radius:8px;font-weight:600;font-size:14px;transition:top .2s var(--e)}
+.skip:focus{top:16px;outline:2px solid var(--ink);outline-offset:2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"LEO — AI Life Insurance Underwriter","url":"https://lumiqmarketingteam.github.io/Lumiq_Team_Marketing/leo.html","description":"LEO is LiteCone's AI life insurance underwriting agent — autonomous decisions against your manual with a full audit trail.","isPartOf":{"@type":"WebSite","name":"LiteCone.ai","url":"https://lumiqmarketingteam.github.io/Lumiq_Team_Marketing/"}}
@@ -106,12 +109,15 @@ footer{border-top:1px solid var(--line);padding:32px 0;background:var(--bg-1)}
 </head>
 <body>
 
+<a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="nav">
     <a class="back" href="./">&larr; LiteCone.ai</a>
     <a href="./#briefing" class="btn btn-primary">Book a briefing <span class="ar">↗</span></a>
   </div>
 </header>
+
+<main id="main">
 
 <section class="hero">
   <div class="wrap">
@@ -155,6 +161,8 @@ footer{border-top:1px solid var(--line);padding:32px 0;background:var(--bg-1)}
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap foot">
