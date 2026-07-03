@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lumiqmarketingteam.github.io/Lumiq_Team_Marketing/sitemap.xml
