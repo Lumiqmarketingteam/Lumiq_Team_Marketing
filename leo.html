@@ -238,6 +238,73 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
   .sec-head .end{grid-column:1/-1;text-align:left;margin-top:4px}
   .eyebrow .place{display:none}
 }
+/* ============ FORM MODALS (pop-up overlays) ============ */
+:root{--err:#E5675C}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--err:#C4322B}}
+:root[data-theme="light"]{--err:#C4322B}
+html{scrollbar-gutter:stable}
+
+.ov{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:rgba(6,6,6,.62);backdrop-filter:blur(6px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s var(--e),visibility 0s linear .22s;overflow-y:auto;overscroll-behavior:contain}
+.ov.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .22s var(--e)}
+.ov-panel{width:min(720px,100%);max-height:calc(100svh - 48px);border:1px solid var(--line-2);border-radius:16px;background:var(--bg-1);color:var(--ink);box-shadow:0 44px 120px -30px rgba(0,0,0,.62);opacity:0;transform:translateY(10px) scale(.985);transition:opacity .24s var(--e),transform .24s var(--e);overflow:hidden}
+.ov.open .ov-panel{opacity:1;transform:none}
+.modal-inner{max-height:calc(100svh - 48px);overflow-y:auto;padding:clamp(24px,3vw,34px)}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.modal-eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-ink)}
+.modal-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+.modal-close{flex:none;width:34px;height:34px;border-radius:9px;border:1px solid var(--ctl-line);display:grid;place-items:center;color:var(--ink-2);transition:color .2s var(--e),border-color .2s var(--e),transform .1s var(--e)}
+.modal-close:active{transform:scale(.94)}
+@media (hover:hover) and (pointer:fine){.modal-close:hover{color:var(--ink);border-color:var(--ink-3)}}
+.modal h3{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(26px,3.4vw,34px);letter-spacing:-.02em;line-height:1.08;color:var(--ink)}
+.modal h3 em{font-style:italic;color:var(--accent)}
+.modal .mdek{margin-top:12px;margin-bottom:18px;font-size:15px;color:var(--ink-2);line-height:1.5;max-width:62ch}
+.modal .field{margin-bottom:18px}
+.modal .frow{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.modal label{display:block;font-size:12.5px;font-weight:500;letter-spacing:.01em;color:var(--ink-2);margin-bottom:8px}
+.modal fieldset{border:0;margin:0;padding:0;min-width:0}
+.modal legend{display:block;font-size:12.5px;font-weight:500;letter-spacing:.01em;color:var(--ink-2);margin-bottom:8px;padding:0}
+.modal label .req{color:var(--accent-ink);margin-left:2px}
+.modal .control{width:100%;font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);background:var(--bg-2);border:1px solid var(--ctl-line);border-radius:9px;padding:13px 15px;transition:border-color .18s var(--e),box-shadow .18s var(--e)}
+.modal .control::placeholder{color:var(--ink-3)}
+.modal .control:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.modal textarea.control{min-height:80px;resize:vertical;line-height:1.55}
+.modal select.control{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23808079' stroke-width='1.4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+.modal .field.err .control{border-color:var(--err);box-shadow:0 0 0 3px color-mix(in srgb,var(--err) 22%,transparent)}
+.modal .msg{display:none;margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.02em;color:var(--err)}
+.modal .field.err .msg{display:block}
+.modal .chips{display:flex;flex-wrap:wrap;gap:8px}
+.modal .chip{position:relative;display:inline-flex}
+.modal .chip input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+.modal .chip span{display:inline-flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:var(--ink-2);border:1px solid var(--ctl-line);border-radius:30px;padding:8px 12px;transition:color .18s var(--e),border-color .18s var(--e),background .18s var(--e)}
+.modal .chip span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink-4);transition:background .18s var(--e),box-shadow .18s var(--e)}
+.modal .chip input:checked + span{color:var(--accent-ink);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.modal .chip input:checked + span::before{background:var(--accent);box-shadow:0 0 8px var(--accent-glow)}
+.modal .chip input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.modal .chip span:hover{color:var(--ink);border-color:var(--ink-3)}}
+.modal .actions{margin-top:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.modal .form-note{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.02em;color:var(--ink-3);line-height:1.5}
+.modal .send-err{display:none;width:100%;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.02em;color:var(--err);line-height:1.5}
+.modal .done{display:none}
+.modal .done.show{display:block;animation:mpop .45s var(--e)}
+.modal .done .check{width:48px;height:48px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 10px 30px -10px var(--accent-glow)}
+.modal .done h4{margin-top:20px;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(24px,3vw,30px);letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+.modal .done p{margin-top:12px;font-size:15px;color:var(--ink-2);line-height:1.55}
+.modal .done .next{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.02em;color:var(--ink-3);line-height:1.6}
+@keyframes mpop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.modal .done .back{display:inline-flex;align-items:center;gap:9px;margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--ink-2);transition:color .2s var(--e);cursor:pointer}
+@media (hover:hover) and (pointer:fine){.modal .done .back:hover{color:var(--accent-ink)}}
+@media (max-width:520px){.modal .actions{flex-direction:column;align-items:stretch}.modal .actions .btn{width:100%}.modal .frow{grid-template-columns:1fr}}
+@media (max-height:720px){
+  .modal-inner{padding:22px 26px}
+  .modal h3{font-size:25px}
+  .modal .mdek{margin-top:9px;margin-bottom:16px;font-size:14px}
+  .modal .field{margin-bottom:12px}
+  .modal .control{padding:10px 13px}
+  .modal textarea.control{min-height:64px}
+  .modal .actions{margin-top:14px}
+  .modal .chip span{padding:7px 11px}
+}
+@media (prefers-reduced-motion:reduce){.ov,.ov-panel{transition:none}.ov-panel{transform:none}.modal .done.show{animation:none}}
 @media (max-width:560px){
   .metrics,.brains{grid-template-columns:1fr}
   .metric:not(:last-child){border-right:none}
@@ -274,7 +341,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
     </nav>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme"></button>
-      <a href="./#briefing" class="btn btn-primary">Book a briefing <span class="ar">↗</span></a>
+      <a href="./#open-briefing" data-modal="m-briefing" class="btn btn-primary">Book a briefing <span class="ar">↗</span></a>
     </div>
   </div>
 </header>
@@ -295,7 +362,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
         <h1 class="rise">Auto-Decisioning with <em>LEO</em>.</h1>
         <p class="hero-sub rise">Turn Life Insurance Underwriting into an Autonomous Workflow.</p>
         <div class="hero-cta rise">
-          <a href="./#briefing" class="btn btn-primary">Book a briefing <span class="ar">↗</span></a>
+          <a href="./#open-briefing" data-modal="m-briefing" class="btn btn-primary">Book a briefing <span class="ar">↗</span></a>
           <a href="#journey" class="btn btn-ghost">See how LEO decides <span class="ar">→</span></a>
         </div>
       </div>
@@ -468,7 +535,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
     <h2 class="rise">LEO can <em>auto-decide</em> it.</h2>
     <p class="dek rise">Book a 45-minute briefing. We&rsquo;ll show you exactly what Zero-Touch life underwriting looks like on your manual, in your own cloud.</p>
     <div class="cta-row rise">
-      <a href="./#briefing" class="btn btn-primary">Book a briefing <span class="ar">↗</span></a>
+      <a href="./#open-briefing" data-modal="m-briefing" class="btn btn-primary">Book a briefing <span class="ar">↗</span></a>
       <a href="./#agents" class="btn btn-ghost">Meet the other Agentic AI co-workers <span class="ar">→</span></a>
     </div>
   </div>
@@ -494,7 +561,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
         </div>
         <div class="foot-col">
           <h4>Engage</h4>
-          <a href="./#open-briefing">Book a briefing ↗</a>
+          <a href="./#open-briefing" data-modal="m-briefing">Book a briefing ↗</a>
           <a href="./#open-demo">Request a demo ↗</a>
           <a href="./#open-contact">Contact us ↗</a>
           <a href="mailto:hello@litecone.ai">hello@litecone.ai</a>
@@ -508,6 +575,43 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
     </div>
   </div>
 </footer>
+
+<div class="ov" id="m-briefing" role="dialog" aria-modal="true" aria-labelledby="m-briefing-t" aria-hidden="true">
+  <div class="ov-panel modal">
+    <div class="modal-inner">
+      <div class="modal-head">
+        <span class="modal-eyebrow"><span class="dot"></span>Book a briefing</span>
+        <button class="modal-close" data-close aria-label="Close"><svg width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1 L13 13 M13 1 L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+      </div>
+      <h3 id="m-briefing-t">Book your <em>45-minute</em> briefing.</h3>
+      <p class="mdek">We&rsquo;ll show your team what Near-Zero Human Touch looks like on your manuals.</p>
+      <form data-form="briefing" novalidate>
+          <div class="frow">
+            <div class="field"><label for="b-name">Full name<span class="req">*</span></label><input id="b-name" name="name" type="text" class="control" placeholder="Jane Okoro" required autocomplete="name"><span class="msg">Tell us your name.</span></div>
+            <div class="field"><label for="b-email">Work email<span class="req">*</span></label><input id="b-email" name="email" type="email" class="control" placeholder="jane@company.com" required autocomplete="email"><span class="msg">Enter a valid work email.</span></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label for="b-company">Company<span class="req">*</span></label><input id="b-company" name="company" type="text" class="control" placeholder="Company name" required autocomplete="organization"><span class="msg">Add your company.</span></div>
+            <div class="field"><label for="b-role">Role<span class="req">*</span></label><input id="b-role" name="role" type="text" class="control" placeholder="e.g. Head of Underwriting" required autocomplete="organization-title"><span class="msg">Add your role.</span></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label for="b-sector">Sector<span class="req">*</span></label><select id="b-sector" name="sector" class="control" required><option value="" disabled selected>Choose your sector</option><option value="insurance">Insurance</option><option value="banking">Banking</option><option value="capital-markets">Capital Markets</option><option value="lending">Lending</option><option value="other">Other</option></select><span class="msg">Pick your sector.</span></div>
+            <div class="field"><label for="b-timeframe">Preferred timeframe<span class="req">*</span></label><select id="b-timeframe" name="timeframe" class="control" required><option value="" disabled selected>When suits you?</option><option value="this-week">This week</option><option value="next-week">Next week</option><option value="this-month">This month</option><option value="exploring">Just exploring</option></select><span class="msg">Pick a timeframe.</span></div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">Book briefing <span class="ar">&rarr;</span></button>
+            <span class="send-err" role="alert">Couldn&rsquo;t send just now — please retry or email hello@litecone.ai.</span>
+          </div>
+      </form>
+      <div class="done" role="status" aria-live="polite">
+        <div class="check" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.4 5.2 L4 7.8 L8.7 2.2" fill="none" stroke="#100600" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h4>Briefing requested.</h4>
+        <p>Thanks — we&rsquo;ve got your request. We&rsquo;ll be in touch within one business day to lock a time.</p>
+        <div class="next">Watch your inbox for a few slots to choose from.<br><span class="back" data-close>&larr; Close</span></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -550,6 +654,119 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
         });
       });
     }, {threshold:0.35}).observe(brains);
+  })();
+
+  /* ===== form pop-ups (custom overlays — sandbox-safe, no native dialog API) ===== */
+  (function(){
+    var openOv = null;
+    var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    var LEAD_ENDPOINT = 'https://formsubmit.co/ajax/team.marketing@lumiq.ai';
+
+    function openModal(id, trigger){
+      var ov = document.getElementById(id); if(!ov) return false;
+      ov.__trigger = trigger || null;
+      ov.classList.add('open');
+      ov.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      openOv = ov;
+      var pre = trigger && trigger.getAttribute && trigger.getAttribute('data-coworker');
+      if(pre){ ov.querySelectorAll('input[name="coworkers"]').forEach(function(c){ c.checked = (c.value === pre); }); }
+      var f = ov.querySelector('.control');
+      if(f) setTimeout(function(){ try{ f.focus({preventScroll:true}); }catch(_){ f.focus(); } }, reduce?0:80);
+      return true;
+    }
+    function closeModal(ov){
+      if(!ov) return;
+      ov.classList.remove('open');
+      ov.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      if(openOv === ov) openOv = null;
+      var form = ov.querySelector('form'), done = ov.querySelector('.done');
+      setTimeout(function(){
+        if(form){ form.reset(); form.style.display=''; form.querySelectorAll('.field.err').forEach(function(x){ x.classList.remove('err'); }); form.querySelectorAll('[aria-invalid]').forEach(function(x){ x.removeAttribute('aria-invalid'); }); }
+        if(done) done.classList.remove('show');
+      }, reduce?0:260);
+      if(ov.__trigger && ov.__trigger.focus) ov.__trigger.focus();
+    }
+    function trap(ov, e){
+      if(e.key !== 'Tab') return;
+      var nodes = Array.prototype.filter.call(ov.querySelectorAll(FOCUSABLE), function(el){ return el.offsetParent !== null; });
+      if(!nodes.length) return;
+      var first = nodes[0], last = nodes[nodes.length-1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+    function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    document.querySelectorAll('[data-modal]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('data-modal');
+        if(document.getElementById(id)){ e.preventDefault(); openModal(id, a); }  /* else href fallback navigates */
+      });
+    });
+
+    /* deep links from other pages: /#open-briefing etc. */
+    var hm = location.hash.match(/^#open-(briefing|demo|contact)$/);
+    if(hm){
+      openModal('m-' + hm[1], null);
+      try{ history.replaceState(null, '', location.pathname + location.search); }catch(_){}
+    }
+
+    document.querySelectorAll('.ov').forEach(function(ov){
+      ov.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', function(){ closeModal(ov); }); });
+      ov.addEventListener('click', function(e){ if(e.target === ov) closeModal(ov); });   /* click backdrop */
+      ov.addEventListener('keydown', function(e){ trap(ov, e); });
+      var form = ov.querySelector('form'), done = ov.querySelector('.done');
+      if(!form) return;
+      form.querySelectorAll('.field').forEach(function(fl, ix){
+        var m = fl.querySelector('.msg'), c = fl.querySelector('.control');
+        if(m && c){ m.id = m.id || form.getAttribute('data-form') + '-msg-' + ix; c.setAttribute('aria-describedby', m.id); }
+      });
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var ok = true;
+        form.querySelectorAll('.field.err').forEach(function(f){ f.classList.remove('err'); });
+        form.querySelectorAll('[aria-invalid]').forEach(function(x){ x.removeAttribute('aria-invalid'); });
+        form.querySelectorAll('[required]').forEach(function(el){
+          var w = el.closest('.field'); if(!w) return;
+          var empty = (el.value||'').trim() === '';
+          var bad = el.type === 'email' && !empty && !validEmail(el.value.trim());
+          if(empty || bad){ ok = false; w.classList.add('err'); el.setAttribute('aria-invalid','true'); }
+        });
+        if(!ok){ var fe = form.querySelector('.field.err .control'); if(fe) fe.focus(); return; }
+        var data = {};
+        new FormData(form).forEach(function(v,k){ data[k] = (k in data) ? [].concat(data[k], v) : v; });
+        if(Array.isArray(data.coworkers)) data.coworkers = data.coworkers.join(', ');
+        data.form_type = form.getAttribute('data-form');
+        data._subject = 'LiteCone lead · ' + data.form_type + (data.name ? ' · ' + data.name : '') + (data.company ? ' — ' + data.company : '');
+        data._template = 'table';
+        data._captcha = 'false';
+        if(data.email) data._replyto = data.email;
+        var btn = form.querySelector('button[type="submit"]');
+        var sendErr = form.querySelector('.send-err');
+        if(sendErr) sendErr.style.display = 'none';
+        var orig = btn.innerHTML;
+        btn.disabled = true; btn.innerHTML = 'Sending&hellip;';
+        fetch(LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+          body: JSON.stringify(data)
+        }).then(function(r){
+          return r.json().catch(function(){ return {}; }).then(function(j){
+            if(!r.ok || String(j.success) === 'false') throw new Error('send failed');
+            btn.disabled = false; btn.innerHTML = orig;
+            form.style.display = 'none';
+            if(done) done.classList.add('show');
+          });
+        }).catch(function(){
+          btn.disabled = false; btn.innerHTML = orig;
+          if(sendErr) sendErr.style.display = 'block';
+        });
+      });
+      form.addEventListener('input', function(e){ var w = e.target.closest && e.target.closest('.field'); if(w) w.classList.remove('err'); if(e.target && e.target.removeAttribute) e.target.removeAttribute('aria-invalid'); });
+    });
+
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && openOv) closeModal(openOv); });
   })();
 
   /* theme toggle */
