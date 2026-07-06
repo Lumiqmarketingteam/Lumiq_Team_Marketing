@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)">
 <title>Page not found · LiteCone.ai</title>
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="/Litecone_Website/assets/favicon.svg">
@@ -42,6 +44,8 @@ p{margin:20px auto 0;color:var(--ink-2);font-size:16px;max-width:42ch}
 .btn:active{transform:scale(.97)}
 @media (hover:hover) and (pointer:fine){.btn-primary:hover{background:var(--accent-hi)}.btn-ghost:hover{border-color:var(--ink-2)}}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:fixed;left:16px;top:-72px;z-index:300;background:var(--accent);color:#100600;padding:12px 18px;border-radius:8px;font-weight:600;font-size:14px;transition:top .2s var(--e)}
+.skip:focus{top:16px;outline:2px solid var(--ink);outline-offset:2px}
 button{font:inherit;background:none;border:0;color:inherit;cursor:pointer}
 img{max-width:100%;display:block}
 header{position:fixed;inset:0 0 auto 0;z-index:80;background:var(--header-bg);backdrop-filter:blur(18px) saturate(1.2);border-bottom:1px solid var(--line)}
@@ -95,6 +99,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
 <body>
 
 <a id="top"></a>
+<a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="nav">
     <a href="/Litecone_Website/" class="brand" aria-label="LiteCone.ai home"><img class="logo-dark" src="/Litecone_Website/assets/LiteCone_mark.png" alt="LiteCone.ai" height="22"><img class="logo-light" src="/Litecone_Website/assets/LiteCone_logo_light.png" alt="LiteCone.ai" height="22"></a>
@@ -120,7 +125,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="code">404 · Not found</div>
   <h1>This page isn&rsquo;t in <em>the manual</em>.</h1>
   <p>The address may have moved or never existed. Every case we can decide starts from the homepage.</p>
