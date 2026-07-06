@@ -153,16 +153,8 @@ section{position:relative}
 .card{padding:32px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:12px;position:relative;transition:background .25s var(--e)}
 .card::before{content:"";position:absolute;left:0;top:0;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--e)}
 @media (hover:hover) and (pointer:fine){.card:hover{background:var(--tint)}.card:hover::before{transform:scaleX(1)}}
-.card .stat{font-family:'Fraunces';font-weight:300;font-size:clamp(26px,2.8vw,34px);color:var(--accent-ink);line-height:1;letter-spacing:-.02em}
-.card .t{font-size:15px;font-weight:600;color:var(--ink)}
+.card .t{font-size:16.5px;font-weight:600;color:var(--ink)}
 .card .b{font-size:14px;color:var(--ink-2);line-height:1.55}
-
-/* zero-touch aside */
-.zt-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
-.zt-grid p{margin-top:16px;font-size:17px;color:var(--ink-2);line-height:1.6;max-width:52ch}
-.zt-aside{border-left:1px solid var(--line);padding-left:32px}
-.zt-aside p{margin:0;font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(22px,2.4vw,32px);color:var(--ink);line-height:1.25;letter-spacing:-.015em;max-width:22ch}
-.zt-aside em{font-style:italic;color:var(--accent)}
 
 /* steps — connected journey rail */
 .flow{margin-top:64px;position:relative;--fgap:clamp(28px,4.5vw,60px)}
@@ -222,8 +214,6 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
   .fstep{position:relative;padding-left:68px}
   .fstep .nod{position:absolute;left:0;top:0}
   .fs-label{margin-top:12px}
-  .zt-grid{grid-template-columns:1fr;gap:36px}
-  .zt-aside{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:28px}
   .sec-head{grid-template-columns:auto 1fr}
   .sec-head .end{grid-column:1/-1;text-align:left;margin-top:4px}
   .eyebrow .place{display:none}
@@ -307,17 +297,17 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
   <div class="wrap">
     <div class="sec-head rise">
       <span class="meta num">01</span>
-      <span class="meta">Fulfil a promise</span>
+      <span class="meta">The promise</span>
       <span class="meta end">Certainty in minutes, not months</span>
     </div>
     <div class="lead rise">
-      <h2>Life insurance is a promise. LEO keeps it <em>on time</em>.</h2>
-      <p class="dek">Life insurance is a promise of security when a family needs it most. Yet legacy queues force families to wait weeks for a decision.</p>
-      <p class="dek">LEO bridges that gap by bringing Auto-Decisioning directly to your life insurance workflow. Operating with absolute consistency and unmatched precision, LEO processes complex life applications autonomously — <b>clearing backlogs and delivering certainty in minutes, not months.</b></p>
+      <h2>Fulfil A <em>Promise</em></h2>
+      <p class="dek">Life insurance is a promise of security when a family needs it most. Yet, legacy queues force families to wait weeks for a decision.</p>
+      <p class="dek">LEO bridges that gap by bringing Auto-Decisioning directly to your life insurance workflow. Operating with absolute consistency and unmatched precision, LEO processes complex life applications autonomously — clearing backlogs and delivering certainty in minutes, not months.</p>
     </div>
     <div class="cards2">
-      <div class="card rise"><div class="stat">1+ year</div><div class="t">In live production</div><div class="b">Proven to handle real-life portfolios without missing a beat.</div></div>
-      <div class="card rise"><div class="stat">Regulated</div><div class="t">Fully regulated compliance</div><div class="b">Built-in safeguards that respect both the human element and strict global guidelines.</div></div>
+      <div class="card rise"><div class="t">1+ Year in Live Production</div><div class="b">Proven to handle real-life portfolios without missing a beat.</div></div>
+      <div class="card rise"><div class="t">Fully Regulated Compliance</div><div class="b">Built-in safeguards that respect both the human element and strict global guidelines.</div></div>
     </div>
   </div>
 </section>
@@ -330,12 +320,9 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
       <span class="meta">Zero-Touch underwriting</span>
       <span class="meta end">Industry first</span>
     </div>
-    <div class="zt-grid">
-      <div class="rise">
-        <h2 style="font-size:clamp(28px,4.2vw,50px);letter-spacing:-.02em;line-height:1.05;max-width:22ch">A different speed for a sensitive industry.</h2>
-        <p>When volumes spike, decision fatigue leads to costly delays. LEO auto-decides the cases that used to wait for a senior — impairments, loadings, large-sum financial underwriting.</p>
-      </div>
-      <div class="zt-aside rise"><p>The cases that used to wait for a senior — <em>decided in minutes</em>.</p></div>
+    <div class="lead rise">
+      <h2>A Different Speed for a <em>Sensitive Industry</em></h2>
+      <p class="dek">When volumes spike, decision fatigue leads to costly delays. LEO auto-decides the cases that used to wait for a senior — impairments, loadings, large-sum financial underwriting.</p>
     </div>
   </div>
 </section>
@@ -345,16 +332,15 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
   <div class="wrap">
     <div class="sec-head rise">
       <span class="meta num">03</span>
-      <span class="meta">Like a co-worker</span>
-      <span class="meta end">Giving back your life — and your client's</span>
+      <span class="meta">Like a Co-worker</span>
     </div>
     <div class="lead rise">
-      <h2>A tireless underwriting <em>co-worker</em>, not a black box.</h2>
-      <p class="dek">As a critical part of the LiteCone workforce, LEO is an agentic AI built specifically to handle the deep intricacies of life insurance underwriting. Working alongside your human team, LEO acts as a tireless life-underwriter co-worker — freeing your senior specialists to focus on the highly complex, sensitive, and non-standard cases that truly require a human touch.</p>
+      <h2>Giving Back Your Life <em>+ Your Client's Life</em></h2>
+      <p class="dek">As a critical part of the LiteCone workforce, LEO is an agentic AI built specifically to handle the deep intricacies of Life Insurance Underwriting. Working alongside your human team, LEO acts as a tireless Life Underwriter co-worker, freeing your senior specialists to focus on highly complex, sensitive, and non-standard cases that truly require a human touch.</p>
     </div>
     <div class="cards2">
-      <div class="card rise"><div class="stat">Grounded</div><div class="t">Manual-grounded logic</div><div class="b">LEO reads your exact underwriting manual and applies it flawlessly.</div></div>
-      <div class="card rise"><div class="stat">Together</div><div class="t">A growing workforce</div><div class="b">Integrates perfectly with intake specialists like AURA to keep your workflow fluid.</div></div>
+      <div class="card rise"><div class="t">Policy-Grounded Logic</div><div class="b">LEO reads your exact underwriting manual and applies it flawlessly.</div></div>
+      <div class="card rise"><div class="t">A Growing Workforce</div><div class="b">Integrates perfectly with intake specialists like AURA to keep your workflow fluid.</div></div>
     </div>
   </div>
 </section>
@@ -368,8 +354,8 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
       <span class="meta end">Three-step deep dive</span>
     </div>
     <div class="lead rise">
-      <h2>From raw data to a fully cited, <em>empathetic</em> decision.</h2>
-      <p class="dek">LEO takes life applications from raw intake through a comprehensive three-step architectural deep dive.</p>
+      <h2>From Raw Data to a Fully Cited, <em>Empathetic</em> Decision</h2>
+      <p class="dek">LEO takes life applications from raw Intake through a comprehensive three-step architectural deep dive:</p>
     </div>
     <div class="flow">
       <div class="flow-rail" aria-hidden="true"></div>
@@ -377,7 +363,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
         <div class="fstep rise">
           <div class="nod" aria-hidden="true">01</div>
           <div class="fs-label">Intake &amp; Submission</div>
-          <div class="fs-title">Intelligent document handling</div>
+          <div class="fs-title">Intelligent Document Handling</div>
           <p class="fs-sub">Case arrives in native form. No re-keying, no rip-and-replace.</p>
           <ul>
             <li>Document and quality assessment</li>
@@ -390,8 +376,8 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
         <div class="fstep rise">
           <div class="nod" aria-hidden="true">02</div>
           <div class="fs-label">Verification</div>
-          <div class="fs-title">External and internal integration</div>
-          <p class="fs-sub">Every fact is grounded against your manual and third-party data sources.</p>
+          <div class="fs-title">External and Internal Integration</div>
+          <p class="fs-sub">Every fact is grounded against your policy and third-party data sources.</p>
           <ul>
             <li>KYC services</li>
             <li>Credit bureau checks</li>
@@ -403,7 +389,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
         <div class="fstep rise">
           <div class="nod" aria-hidden="true">03</div>
           <div class="fs-label">Underwriting</div>
-          <div class="fs-title">Auto-Decisioning engine</div>
+          <div class="fs-title">Auto-Decisioning Engine</div>
           <p class="fs-sub">Decision made. Cited. Logged. Fully replayable.</p>
           <ul>
             <li>Risk assessment and correlation</li>
@@ -416,7 +402,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
       </div>
     </div>
     <div class="step-note rise">
-      <p>You get an unshakeable auto-decision with a complete, line-by-line audit trail. You just need to go through it — <em>and focus on building the client's trust</em>.</p>
+      <p>You get an unshakeable Auto-Decision with a complete, line-by-line audit trail. You just need to go through it and <em>focus on building the client's trust!</em></p>
     </div>
   </div>
 </section>
@@ -428,11 +414,11 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;background:var(--bg-
       <div class="sec-head rise">
         <span class="meta num">05</span>
         <span class="meta">Compliant by design</span>
-        <span class="meta end">Auditable for peace of mind</span>
+        <span class="meta end">No black boxes</span>
       </div>
       <div class="lead rise">
-        <h2>No black boxes. <em>Ever.</em></h2>
-        <p class="big">Because life insurance decisions have massive, long-term impacts on real human families, LEO&rsquo;s audit trail is built directly into every single action. Every decision LEO makes is <b>completely transparent, traceable, and defensible</b> — to your internal board, your risk-management team, and strict industry regulators.</p>
+        <h2>Auditable for <em>Peace of Mind</em></h2>
+        <p class="big">Because life insurance decisions have massive, long-term impacts on real human families, LEO&rsquo;s Audit Trail is built directly into every single action. There are no black boxes here. Every decision LEO makes is <b>completely transparent, traceable, and defensible</b> to your internal board, risk management team, and strict industry regulators.</p>
       </div>
     </div>
   </div>
