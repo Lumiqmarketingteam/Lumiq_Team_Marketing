@@ -164,17 +164,17 @@ section{position:relative}
 .zt-aside p{margin:0;font-family:'Fraunces';font-style:italic;font-weight:300;font-size:clamp(22px,2.4vw,32px);color:var(--ink);line-height:1.25;letter-spacing:-.015em;max-width:22ch}
 .zt-aside em{font-style:italic;color:var(--accent)}
 
-/* steps */
-.steps3{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.step{padding:30px 26px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;position:relative;transition:background .25s var(--e)}
-.step::before{content:"";position:absolute;left:0;top:0;height:2px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--e)}
-@media (hover:hover) and (pointer:fine){.step:hover{background:var(--tint)}.step:hover::before{transform:scaleX(1)}}
-.step .sn{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--accent-ink);text-transform:uppercase}
-.step .st{margin-top:14px;font-family:'Fraunces';font-weight:300;font-size:22px;color:var(--ink);letter-spacing:-.01em;line-height:1.15}
-.step .sb{margin-top:8px;font-size:13.5px;color:var(--ink-2);line-height:1.5}
-.step ul{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);list-style:none;display:flex;flex-direction:column;gap:9px}
-.step li{position:relative;padding-left:16px;font-size:13.5px;color:var(--ink-2);line-height:1.45}
-.step li::before{content:"";position:absolute;left:0;top:.52em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+/* steps — connected journey rail */
+.flow{margin-top:64px;position:relative;--fgap:clamp(28px,4.5vw,60px)}
+.flow-rail{position:absolute;left:23px;top:23px;height:1px;width:calc(66.666% + (var(--fgap) * 2 / 3));background:linear-gradient(90deg,var(--accent),rgba(243,107,29,.35) 55%,var(--line-2));z-index:0}
+.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 var(--fgap);position:relative}
+.fstep .nod{position:relative;z-index:1;width:46px;height:46px;border-radius:50%;border:1px solid var(--accent);background:var(--bg);display:grid;place-items:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent-ink);box-shadow:0 0 0 5px var(--bg),0 0 0 6px rgba(243,107,29,.16)}
+.fs-label{margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;color:var(--accent-ink);text-transform:uppercase}
+.fs-title{margin-top:10px;font-family:'Fraunces',serif;font-weight:300;font-size:clamp(21px,2.2vw,27px);letter-spacing:-.01em;line-height:1.15;color:var(--ink)}
+.fs-sub{margin-top:9px;font-size:13.5px;color:var(--ink-2);line-height:1.55;max-width:34ch}
+.fstep ul{margin-top:20px;padding-top:18px;border-top:1px dashed var(--line);list-style:none;display:flex;flex-direction:column;gap:10px;max-width:34ch}
+.fstep li{position:relative;padding-left:17px;font-size:13.5px;color:var(--ink-2);line-height:1.45}
+.fstep li::before{content:"";position:absolute;left:0;top:.5em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
 .step-note{margin-top:44px;border:1px solid var(--line);border-radius:14px;padding:clamp(24px,3.5vw,36px);background:linear-gradient(180deg,var(--tint),transparent);position:relative;overflow:hidden}
 .step-note::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),transparent)}
 .step-note p{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(19px,2.1vw,26px);line-height:1.35;color:var(--ink);max-width:44ch;letter-spacing:-.01em}
@@ -207,7 +207,12 @@ footer a{transition:color .2s var(--e)}
   .hero-grid{grid-template-columns:1fr;gap:44px}
   .hero-visual{justify-self:center;max-width:320px}
   .cards2{grid-template-columns:1fr}
-  .steps3{grid-template-columns:1fr}
+  .flow-rail{display:none}
+  .flow-grid{grid-template-columns:1fr;gap:48px}
+  .flow-grid::before{content:"";position:absolute;left:23px;top:23px;bottom:23px;width:1px;background:linear-gradient(180deg,var(--accent),var(--line))}
+  .fstep{position:relative;padding-left:68px}
+  .fstep .nod{position:absolute;left:0;top:0}
+  .fs-label{margin-top:12px}
   .zt-grid{grid-template-columns:1fr;gap:36px}
   .zt-aside{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:28px}
   .sec-head{grid-template-columns:auto 1fr}
@@ -356,42 +361,48 @@ footer a{transition:color .2s var(--e)}
       <h2>From raw data to a fully cited, <em>empathetic</em> decision.</h2>
       <p class="dek">LEO takes life applications from raw intake through a comprehensive three-step architectural deep dive.</p>
     </div>
-    <div class="steps3">
-      <div class="step rise">
-        <span class="sn">Step 01 · Intake &amp; Submission</span>
-        <div class="st">Intelligent document handling</div>
-        <p class="sb">Case arrives in native form. No re-keying, no rip-and-replace.</p>
-        <ul>
-          <li>Document and quality assessment</li>
-          <li>Data extraction and classification</li>
-          <li>Document tagging and corrections</li>
-          <li>Data validation and verification</li>
-          <li>Pending requirement handling</li>
-        </ul>
-      </div>
-      <div class="step rise">
-        <span class="sn">Step 02 · Verification</span>
-        <div class="st">External and internal integration</div>
-        <p class="sb">Every fact is grounded against your manual and third-party data sources.</p>
-        <ul>
-          <li>KYC services</li>
-          <li>Credit bureau checks</li>
-          <li>Third-party sources</li>
-          <li>Negative news search</li>
-          <li>Workflow and journey integration</li>
-        </ul>
-      </div>
-      <div class="step rise">
-        <span class="sn">Step 03 · Underwriting</span>
-        <div class="st">Auto-Decisioning engine</div>
-        <p class="sb">Decision made. Cited. Logged. Fully replayable.</p>
-        <ul>
-          <li>Risk assessment and correlation</li>
-          <li>Financial, medical and lifestyle risk</li>
-          <li>Document fraud detection</li>
-          <li>Reinsurer calculator</li>
-          <li>Referral handling</li>
-        </ul>
+    <div class="flow">
+      <div class="flow-rail" aria-hidden="true"></div>
+      <div class="flow-grid">
+        <div class="fstep rise">
+          <div class="nod" aria-hidden="true">01</div>
+          <div class="fs-label">Intake &amp; Submission</div>
+          <div class="fs-title">Intelligent document handling</div>
+          <p class="fs-sub">Case arrives in native form. No re-keying, no rip-and-replace.</p>
+          <ul>
+            <li>Document and quality assessment</li>
+            <li>Data extraction and classification</li>
+            <li>Document tagging and corrections</li>
+            <li>Data validation and verification</li>
+            <li>Pending requirement handling</li>
+          </ul>
+        </div>
+        <div class="fstep rise">
+          <div class="nod" aria-hidden="true">02</div>
+          <div class="fs-label">Verification</div>
+          <div class="fs-title">External and internal integration</div>
+          <p class="fs-sub">Every fact is grounded against your manual and third-party data sources.</p>
+          <ul>
+            <li>KYC services</li>
+            <li>Credit bureau checks</li>
+            <li>Third-party sources</li>
+            <li>Negative news search</li>
+            <li>Workflow and journey integration</li>
+          </ul>
+        </div>
+        <div class="fstep rise">
+          <div class="nod" aria-hidden="true">03</div>
+          <div class="fs-label">Underwriting</div>
+          <div class="fs-title">Auto-Decisioning engine</div>
+          <p class="fs-sub">Decision made. Cited. Logged. Fully replayable.</p>
+          <ul>
+            <li>Risk assessment and correlation</li>
+            <li>Financial, medical and lifestyle risk</li>
+            <li>Document fraud detection</li>
+            <li>Reinsurer calculator</li>
+            <li>Referral handling</li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="step-note rise">
